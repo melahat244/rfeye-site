@@ -1,134 +1,226 @@
-<!DOCTYPE html>
-<html lang="tr">
+<!DOCTYPE html><html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RFEye | Smart Connection</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #2d8cff;
-            --secondary: #00f2fe;
-            --bg: #060b16;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  <title>RFEye | Akıllı RF & NFC Sistemleri</title>
+  <meta name="description" content="RFEye; RF, NFC ve akıllı algılama sistemlerinde ileri teknoloji çözümler geliştirir." />  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">  <style>
+    :root{
+      --primary:#2d8cff;
+      --secondary:#00f2fe;
+      --bg:#050814;
+      --card:rgba(255,255,255,0.04);
+      --border:rgba(255,255,255,0.08);
+      --text:#eaf2ff;
+    }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: var(--bg);
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            perspective: 1000px;
-        }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
 
-        /* Arka plan siber çizgiler ve ışıklar */
-        .bg-glow {
-            position: fixed;
-            inset: 0;
-            background: radial-gradient(circle at 50% 50%, #0d1d40 0%, #060b16 100%);
-            z-index: -1;
-        }
+    body{
+      font-family:'Space Grotesk',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+    }
 
-        /* Canlı dönen teknolojik ana kart */
-        .tech-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 40px 30px;
-            border-radius: 24px;
-            width: 90%;
-            max-width: 450px;
-            backdrop-filter: blur(15px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(45, 140, 255, 0.1);
-            text-align: center;
-            animation: cardFloat 6s ease-in-out infinite;
-        }
+    /* NAV */
+    nav{
+      position:fixed;
+      top:0;left:0;width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:18px 8%;
+      backdrop-filter:blur(12px);
+      background:rgba(5,8,20,0.7);
+      border-bottom:1px solid var(--border);
+      z-index:1000;
+    }
 
-        @keyframes cardFloat {
-            0%, 100% { transform: translateY(0px) rotateY(0deg); }
-            50% { transform: translateY(-15px) rotateY(5deg); }
-        }
+    .logo{
+      font-family:'Orbitron';
+      color:var(--primary);
+      font-size:1.4rem;
+      letter-spacing:2px;
+      text-decoration:none;
+    }
 
-        /* Parlayan RFEye Logosu */
-        .brand-logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            letter-spacing: 4px;
-            background: linear-gradient(45deg, #ffffff, var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
-            text-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
-        }
+    .menu{
+      display:flex;
+      gap:25px;
+    }
 
-        .subtitle {
-            font-size: 0.85rem;
-            letter-spacing: 3px;
-            color: var(--primary);
-            text-transform: uppercase;
-            margin-bottom: 35px;
-            font-weight: 600;
-        }
+    .menu a{
+      color:var(--text);
+      text-decoration:none;
+      font-size:0.9rem;
+      opacity:0.8;
+    }
 
-        /* İletişim Butonları */
-        .btn-list { display: flex; flex-direction: column; gap: 15px; }
-        
-        .action-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-decoration: none;
-            color: white;
-            padding: 16px;
-            border-radius: 14px;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: 0.3s all ease;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+    .menu a:hover{color:var(--secondary);opacity:1;}
 
-        .action-btn:hover {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-color: transparent;
-            transform: scale(1.03);
-            box-shadow: 0 5px 20px rgba(0, 242, 254, 0.4);
-        }
+    .hamburger{
+      display:none;
+      cursor:pointer;
+      font-size:1.5rem;
+    }
 
-        /* Bilgi Altlığı */
-        .info-footer {
-            margin-top: 35px;
-            font-size: 0.85rem;
-            color: #7a8ba3;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 20px;
-        }
-    </style>
-</head>
-<body>
+    /* HERO */
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:120px 20px 60px;
+      position:relative;
+    }
 
-    <div class="bg-glow"></div>
+    .hero h1{
+      font-family:'Orbitron';
+      font-size:clamp(2rem,6vw,4rem);
+      background:linear-gradient(90deg,#fff,var(--primary));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
 
-    <div class="tech-card">
-        <div class="brand-logo">RFEYE</div>
-        <div class="subtitle">Smart Connection</div>
-        
-        <div class="btn-list">
-            <a class="action-btn" href="tel:+905071139040">📞 Melahat Onaran Ara</a>
-            <a class="action-btn" href="tel:+905334321612">📞 Hayri Can Onaran Ara</a>
-            <a class="action-btn" href="mailto:info@rfeye.org">✉️ info@rfeye.org Gönder</a>
-        </div>
+    .hero p{margin-top:15px;color:#b8c7e0;}
 
-        <div class="info-footer">
-            📍 Malatya Battalgazi Teknokent
-        </div>
-    </div>
+    .cta{
+      margin-top:30px;
+      display:flex;
+      gap:15px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
 
-</body>
+    .btn{
+      padding:12px 22px;
+      border-radius:30px;
+      text-decoration:none;
+      font-weight:600;
+      transition:0.3s;
+      border:1px solid var(--primary);
+      color:white;
+    }
+
+    .btn:hover{
+      transform:scale(1.05);
+      background:rgba(45,140,255,0.15);
+    }
+
+    .btn.primary{
+      background:var(--primary);
+    }
+
+    /* SECTIONS */
+    section{padding:90px 8%;}
+
+    .title{
+      text-align:center;
+      font-family:'Orbitron';
+      color:var(--primary);
+      margin-bottom:40px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      padding:25px;
+      border-radius:15px;
+      transition:0.3s;
+    }
+
+    .card:hover{
+      transform:translateY(-8px);
+      border-color:var(--secondary);
+    }
+
+    /* CONTACT */
+    .contact{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:30px;
+    }
+
+    input,textarea{
+      width:100%;
+      padding:12px;
+      margin-top:10px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      background:rgba(0,0,0,0.3);
+      color:white;
+    }
+
+    footer{
+      text-align:center;
+      padding:40px;
+      border-top:1px solid var(--border);
+      color:#7f93b3;
+    }
+
+    @media(max-width:768px){
+      .menu{display:none;flex-direction:column;position:absolute;top:60px;right:20px;background:#0a1022;padding:15px;border-radius:10px;}
+      .menu.active{display:flex;}
+      .hamburger{display:block;}
+      .contact{grid-template-columns:1fr;}
+    }
+  </style></head><body><nav>
+  <a class="logo" href="#">RFEYE</a>
+  <div class="hamburger" onclick="toggleMenu()">☰</div>
+  <div class="menu" id="menu">
+    <a href="#hero">Başlangıç</a>
+    <a href="#tech">Teknoloji</a>
+    <a href="#about">Hakkımızda</a>
+    <a href="#contact">İletişim</a>
+  </div>
+</nav><header class="hero" id="hero">
+  <div>
+    <h1>SMART CONNECTION</h1>
+    <p>RF • NFC • Sensör Teknolojilerinde Yeni Nesil Çözümler</p><div class="cta">
+  <a class="btn primary" href="tel:+905071139040">Ara</a>
+  <a class="btn" href="#tech">Keşfet</a>
+</div>
+
+  </div>
+</header><section id="tech">
+  <h2 class="title">TEKNOLOJİ</h2>
+  <div class="grid">
+    <div class="card">📡 RF haberleşme sistemleri</div>
+    <div class="card">📲 NFC entegrasyon çözümleri</div>
+    <div class="card">🧠 Akıllı algılama sistemleri</div>
+  </div>
+</section><section id="about">
+  <h2 class="title">HAKKIMIZDA</h2>
+  <div class="card">
+    RFEye, kablosuz iletişim ve akıllı sistemler alanında Ar-Ge odaklı çözümler geliştiren bir teknoloji girişimidir.
+  </div>
+</section><section id="contact">
+  <h2 class="title">İLETİŞİM</h2>
+  <div class="contact">
+    <div class="card">
+      <p>📍 Malatya Battalgazi</p>
+      <p>✉️ info@rfeye.org</p>
+      <p>📞 +90 507 113 90 40</p>
+    </div><div class="card">
+  <input placeholder="Ad" />
+  <input placeholder="E-posta" />
+  <textarea placeholder="Mesaj"></textarea>
+  <button class="btn primary" style="margin-top:10px;width:100%">Gönder</button>
+</div>
+
+  </div>
+</section><footer>
+  © 2026 RFEye | Tüm Hakları Saklıdır
+</footer><script>
+function toggleMenu(){
+  document.getElementById('menu').classList.toggle('active');
+}
+</script></body>
 </html>
